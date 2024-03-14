@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import DetailElement from "../elements/detail.element";
 import FormElement from "../elements/form.elements";
 import { Button } from "../ui/button";
@@ -12,11 +11,13 @@ function IndexPage() {
 
   const { validateSession } = AuthHook();
 
+  // borra los datos de nevegacion d elocaStoage
   function handleLogout() {
     window.localStorage.clear();
     navigate("/login");
   }
 
+  // asegura que la sesión del usuario se valide al cargar la página inicial
   useEffect(() => {
     validateSession();
   }, []);
@@ -24,18 +25,18 @@ function IndexPage() {
   if (section === "upload") {
     return (
       <>
-        <header>
+        <header className="w-full flex justify-between">
+          <h1 className="mt-20 text-left w-full ml-40 text-2xl font-serif">
+            Sistema de carga de datos
+          </h1>
           <Button
+            className="bg-blue-500 text-white px-4 py-2 rounded-full float-right font-serif m-10   "
             onClick={handleLogout}
-            className="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-full float-right font-serif"
           >
             Logout
           </Button>
         </header>
         <div className="w-full flex flex-col items-center">
-          <h1 className="mt-20 text-left w-full ml-40 text-2xl font-serif">
-            Sistema de carga de datos
-          </h1>
           <FormElement setSection={setSection}></FormElement>
         </div>
       </>
@@ -43,18 +44,18 @@ function IndexPage() {
   } else if (section === "detail") {
     return (
       <>
-        <header>
+        <header className="w-full flex justify-between">
+          <h1 className="mt-20 text-left w-full ml-40 text-2xl font-serif">
+            Sistema de carga de datos
+          </h1>
           <Button
+            className="bg-blue-500 text-white px-4 py-2 rounded-full float-right font-serif m-10   "
             onClick={handleLogout}
-            className="bg-blue-200 hover:bg-blue-400 text-white px-4 py-2 float-right"
           >
             Logout
           </Button>
         </header>
         <div className="w-full flex flex-col items-center">
-          <h1 className="mt-20 text-left w-full ml-40 text-2xl font-serif">
-            Sistema de carga de datos
-          </h1>
           <DetailElement setSection={setSection}></DetailElement>
         </div>
       </>

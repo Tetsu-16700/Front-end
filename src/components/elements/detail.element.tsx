@@ -3,10 +3,13 @@ import { Button } from "../ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useToast } from "../ui/use-toast";
 
+// recibe un prop de tipo any
 function DetailElement({ setSection }: { setSection: any }) {
   const { toast } = useToast();
+  // inicia estado local
   const [showInfo, setShowInfo] = useState(true);
 
+  // matriz de objetos
   const [error, setError] = useState([
     {
       name: {
@@ -28,22 +31,22 @@ function DetailElement({ setSection }: { setSection: any }) {
         message: "",
       },
       email: {
-        value: "blue@mail.com",
-        message: "",
-      },
-      age: {
         value: "",
         message: "Required email",
       },
-    }
-    
+      age: {
+        value: ""
+,        message: "Required email",
+      },
+    },
   ]);
 
- function handleDelete(index:number){
-  const newError = error.slice(index )
-  setError(newError);
-  showToast();
- }
+  // elimina un elemento de a matriz
+  function handleDelete(index: number) {
+    const newError = error.slice(index);
+    setError(newError);
+    showToast();
+  }
 
   // muestra de notificaciones
   function showToast() {
@@ -54,7 +57,6 @@ function DetailElement({ setSection }: { setSection: any }) {
       duration: 1000,
     });
   }
-
 
   return (
     <div className="mx-10  border shadow-md rounded-lg flex flex-col gap-8 items-center w-[80%] mt-10 p-4 font-serif">
@@ -77,14 +79,16 @@ function DetailElement({ setSection }: { setSection: any }) {
         </div>
         <div>
           {/* para cargar archivos */}
-          <Button className="bg-blue-500" onClick={() => setSection("upload")}> New File</Button>
+          <Button className="bg-blue-500" onClick={() => setSection("upload")}>
+            {" "}
+            New File
+          </Button>
         </div>
       </header>
 
       <div>
         <h4>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-          Exercitationem quos voluptates
+          The (2) record listed below encountered errors. Plase rectify thse issues and retry.
         </h4>
         <div className="mt-4">
           <table className="w-full" cellPadding={8}>
@@ -150,7 +154,12 @@ function DetailElement({ setSection }: { setSection: any }) {
                     </div>
                   </td>
                   <td valign="top">
-                    <Button className="bg-blue-500" onClick={() => handleDelete(index) }>Retry</Button>
+                    <Button
+                      className="bg-blue-500"
+                      onClick={() => handleDelete(index)}
+                    >
+                      Retry
+                    </Button>
                   </td>
                 </tr>
               ))}

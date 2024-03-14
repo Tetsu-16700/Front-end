@@ -9,14 +9,18 @@ import { AuthHook } from "../hooks/auth.hook";
 function LoginPage() {
   const { toast } = useToast();
 
+  // redirige al usuaro a diferentes paginas en respuesta a ciertas acciones
   const navigate = useNavigate();
 
+  // comprobando si hay un token de autenticación válido almacenado
   const { validateSessionLogin } = AuthHook();
 
+  //  si el usuario ya tiene una sesión iniciada se mantenga conectado
   useEffect(() => {
     validateSessionLogin();
   }, []);
 
+  //  almacena la información del correo electrónico
   const [data, setData] = useState<{
     email: string;
     password: string;
@@ -25,7 +29,8 @@ function LoginPage() {
     password: "",
   });
 
-  function handleSubmit(values: any) {
+  // e utiliza para manejar la presentación del formulario de inicio de sesión
+    function handleSubmit(values: any) {
     const response = fetchLogin(values);
     if (!response) {
       toast({
@@ -45,8 +50,9 @@ function LoginPage() {
     }
   }
 
+  // simula el proceso de autenticación de un usuario
   function fetchLogin(values: any) {
-    if (values.email === "abc@mail.com" && values.password === "abc") {
+    if (values.email === "admin@mail.com" && values.password === "admin") {
       window.localStorage.setItem("auth", "authenticated");
       return true;
     } else {
@@ -76,9 +82,12 @@ function LoginPage() {
               isSubmitting,
               /* and other goodies */
             }) => (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4 font-serif">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col gap-4 font-serif"
+              >
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="" >Email</label>
+                  <label htmlFor="">Email</label>
                   <input
                     autoComplete="off"
                     className="px-2 py-1 border rounded-md border-slate-500 outline-none"
